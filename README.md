@@ -35,3 +35,52 @@ This project is configured for **SSL-secured Kafka** (e.g., Aiven, Confluent). F
 Ensure your Kafka cluster is running and your environment variables are set, then run:
 ```bash
 mvn spring-boot:run
+```
+
+### 2. Inject a Clean Transaction
+
+```bash
+curl -X POST http://localhost:8081/test/inject \
+-H "Content-Type: application/json" \
+-d '{
+  "transactionId": "tx-101",
+  "userId": "user_demo",
+  "amount": 250.00,
+  "currency": "USD"
+}'
+```
+
+Expected Result: APPROVE (Score: 0)
+
+### 3. Blacklist a User Globally
+
+```bash
+curl -X POST "http://localhost:8081/test/blacklist/add?userId=MALICIOUS_USER"
+4. Trigger the Fraud Rule
+
+Bash
+curl -X POST http://localhost:8081/test/inject \
+-H "Content-Type: application/json" \
+-d '{
+  "transactionId": "tx-102",
+  "userId": "MALICIOUS_USER",
+  "amount": 10.00
+}'
+```
+
+Expected Result: REJECT (Score: 100, Reason: Global User Blacklist)
+
+## 📊 Audit Trail
+You can inspect the decision history via the built-in H2 Console:
+
+```
+URL: http://localhost:8081/h2-console/
+
+JDBC URL: jdbc:h2:mem:fraud_db
+
+Query: SELECT * FROM RISK_RESULT ORDER BY processed_at DESC;
+```
+
+🛡️ License
+This project is licensed under the MIT License.
+
