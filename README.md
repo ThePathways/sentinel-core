@@ -1,4 +1,4 @@
-![Java CI with Maven](https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/actions/workflows/maven.yml/badge.svg)
+![Java CI with Maven](https://github.com/ThePathways/sentinel-core/actions/workflows/maven.yml/badge.svg)
 
 # Sentinel Core 🛡️
 
