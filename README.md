@@ -1,4 +1,5 @@
 ![Java CI with Maven](https://github.com/ThePathways/sentinel-core/actions/workflows/maven.yml/badge.svg)
+![Status](https://img.shields.io/badge/Aiven-Ready-purple?style=flat-square)
 
 # Sentinel Core 🛡️
 
